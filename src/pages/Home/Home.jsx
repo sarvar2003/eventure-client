@@ -1,6 +1,7 @@
 import React from 'react'
-import Navbar from '../../components/Navbar'
-import Hero from '../../components/Hero'
+import Navbar from './sections/Navbar'
+import Hero from './sections/Hero'
+import Events from './sections/Events'
 import './Home.css'
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <>
         <Navbar/>
         <Hero/>
+        <Events/>
     </>
   )
 }
