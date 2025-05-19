@@ -45,7 +45,7 @@ const Login = () => {
         Cookies.set('first_name', res.data.first_name);
         Cookies.set('last_name', res.data.last_name);
         Cookies.set('email', res.data.email);
-        history('/dashboard');
+        history('/');
         window.location.reload();
       })
       .catch((error) => {
@@ -64,7 +64,7 @@ const Login = () => {
         </nav>
         <div className="d-flex flex-column align-items-center justify-content-center">
             <h5 className="text-danger mt-2">{errorMessage.message}</h5>
-            <form className="w-100 w-md-50 mt-4" onSubmit={handleSubmit}>
+            <form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
             <div className="mb-3">
                 <input
                 type="email"
@@ -94,7 +94,7 @@ const Login = () => {
                 <label className="form-check-label ms-2 text-muted small">Show password</label>
                 </div>
             </div>
-            <button type="submit" className="btn-primary-blue w-100 py-3 fs-5 rounded-pill fw-bold">Login</button>
+            <button type="submit" className="btn btn-primary ms-3">Login</button>
             </form>
             <p className="mt-5 text-muted">
                 <a href="/forgot-password" className="text-primary-blue text-decoration-underline">Forgot password</a>

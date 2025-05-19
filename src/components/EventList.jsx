@@ -3,42 +3,45 @@ import axiosInstance from '../utils/axios';
 import EventCard from './EventCard';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
-const EventList = () => {
+const EventList = ({ filters }) => {
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axiosInstance.get('/events/')  // Adjust to match your backend endpoint
-      .then(res => {
+    const fetchEvents = async () => {
+      setLoading(true);
+      try {
+        const queryParams = new URLSearchParams();
 
-        setEvents(res.data);  // Assumes backend returns a list of event objects
+        if (filters.title) queryParams.append('title', filters.title);
+        if (filters.topic) queryParams.append('topics', filters.topic);
+        if (filters.language) queryParams.append('language', filters.language);
+        
+        const response = await axiosInstance.get(`/events/?${queryParams.toString()}`);
+        setEvents(response.data);
+      } catch (error) {
+        console.error('Failed to fetch events:', error);
+      } finally {
         setLoading(false);
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.error('Failed to fetch events:', err);
-        setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    fetchEvents();
+  }, [filters]);
 
   return (
-    <Container className="my-5">
-      <h2 className="text-center mb-4">Upcoming Events</h2>
+    <Container>
       {loading ? (
-        <div className="text-center">
+        <div className="text-center my-5">
           <Spinner animation="border" variant="primary" />
         </div>
+      ) : events.length === 0 ? (
+        <p className="text-center my-5">No events found.</p>
       ) : (
         <Row className="g-4">
           {events.map(event => (
             <Col key={event.id} sm={12} md={6} lg={4}>
-              <EventCard
-                title={event.title}
-                date={event.formatted_date}
-                location={event.location}
-                image={event.thumbnail || '../assets/images/default.jpeg'}
-                onClick={() => console.log(`Event ${event.id} clicked`)}
-              />
+              <EventCard event={event} />
             </Col>
           ))}
         </Row>

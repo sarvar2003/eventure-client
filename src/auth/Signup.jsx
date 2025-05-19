@@ -113,7 +113,7 @@ const Signup = () => {
                 <label className="form-check-label ms-2 text-muted small">Show password</label>
                 </div>
             </div>
-            <button type="submit" className="btn-primary-blue w-100 py-3 fs-5 rounded-pill fw-bold">
+            <button type="submit" className="btn btn-primary ms-3">
               Signup
             </button>
             <p className="text-center text-muted mt-3">
@@ -125,15 +125,15 @@ const Signup = () => {
           </form>
         </div>
       ) : (
-        <div className="text-center">
-          <h2 className="text-primary fw-bold mb-3">Conguratulations!</h2>
-          <p className="text-muted">
-            You have successfully registered to Eventure. Please check your mail to verify your account.
-          </p>
-          <a href="/login" className="btn btn-success mt-3">
-            Verified
-          </a>
-        </div>
+      <div className="text-center">
+        <h2 className="text-primary fw-bold mb-3">Conguratulations!</h2>
+        <p className="text-muted">
+          You have successfully registered to Eventure. Please check your mail to verify your account.
+        </p>
+        <a href="/login" className="btn btn-success mt-3">
+          Verified
+        </a>
+      </div>
       )}
     </div>
   );

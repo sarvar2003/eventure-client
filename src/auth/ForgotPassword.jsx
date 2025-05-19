@@ -69,7 +69,7 @@ const ForgotPassword = () => {
                     To get a password reset link, please enter your email address. We will send you a link to reset your password.
                 </p>
                 <div className="d-flex justify-content-center">
-                    <button type="submit" className="btn-primary-blue w-100 py-3 fs-5 rounded-pill fw-bold">
+                    <button type="submit" className="btn btn-primary ms-3">
                         Send
                     </button>
                 </div>

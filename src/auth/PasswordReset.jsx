@@ -91,7 +91,7 @@ const PasswordReset = () => {
                     />
                 <label className="form-check-label ms-2 text-muted small">Show password</label>
                 </div>
-                <button type="submit" className="btn-primary-blue w-100 py-3 fs-5 rounded-pill fw-bold">Reset Password</button>
+                <button type="submit" className="btn btn-primary ms-3">Reset Password</button>
             </form>
 
         </div>
