@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import CreateEvent from './pages/CreateEvent';
 import VerifyEmail from './auth/VerifyEmail';
 import EventControlPage from './pages/EventContolPage';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
