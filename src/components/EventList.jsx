@@ -39,11 +39,15 @@ const EventList = ({ filters }) => {
         <p className="text-center my-5">No events found.</p>
       ) : (
         <Row className="g-4">
-          {events.map(event => (
+          {events && events.length > 0 ? (
+            events.map(event => (
             <Col key={event.id} sm={12} md={6} lg={4}>
               <EventCard event={event} />
             </Col>
-          ))}
+          ))
+          ) : (
+            <p className="text-center my-5">No events found.</p>
+          )}
         </Row>
       )}
     </Container>

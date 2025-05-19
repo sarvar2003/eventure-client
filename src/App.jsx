@@ -35,6 +35,7 @@ function App() {
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/me" element={<Profile />} /> 
         <Route path="/me/event/:id" element={<EventControlPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
