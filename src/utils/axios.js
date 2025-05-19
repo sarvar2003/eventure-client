@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const baseURL = 'http://localhost:8000/';
+const baseURL = 'http://0.0.0.0:8000/';
 
 const token = Cookies.get('token');
 
