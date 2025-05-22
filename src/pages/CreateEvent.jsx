@@ -59,7 +59,7 @@ const handleSubmit = (e) => {
     })
     .then(res => {
       console.log('Event created successfully:', res.data);
-      navigate('/events');
+      navigate('/');
     })
     .catch(err => {
       console.error('Error creating event:', err.response?.data || err.message);
