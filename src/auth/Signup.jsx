@@ -90,7 +90,7 @@ const Signup = () => {
                 <input
                 type={showPassword ? 'text' : 'password'}
                 className="form-control form-control mb-3"
-                placeholder="Parol"
+                placeholder="Password"
                 name="password"
                 autoComplete="on"
                 onChange={handleChange}

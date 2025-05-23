@@ -66,7 +66,7 @@ const PasswordReset = () => {
                     <input
                     type={showPassword ? 'text' : 'password'}
                     className="form-control form-control"
-                    placeholder="Parol"
+                    placeholder="Password"
                     name="password"
                     autoComplete="on"
                     onChange={handleChange}
