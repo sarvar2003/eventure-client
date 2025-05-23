@@ -10,7 +10,7 @@ const EventCard = ({ event }) => {
   const [eventTopics, seteventTopics] = useState([]);
 
   useEffect(() => {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < Math.min(event.topics.length, 3); i++) {
       const topicId = event.topics[i];
       axiosInstance.get(`/events/topics/${topicId}/`)
         .then((res) => {
