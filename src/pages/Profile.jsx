@@ -103,7 +103,7 @@ const Profile = () => {
   const handelDelete = async (eventId) => {
     if (window.confirm("Are you sure you want to delete this event?")) {  
       try {
-        await axiosInstance.delete(`/events/event/${eventId}/update`);
+        await axiosInstance.delete(`/events/event/${eventId}/update/`);
         alert("Event deleted.");
         window.location.reload();
       } catch (error) {
