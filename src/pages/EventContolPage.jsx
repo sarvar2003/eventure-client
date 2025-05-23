@@ -29,21 +29,33 @@ const EventControlPage = () => {
 
 
   useEffect(() => {
-    axiosInstance.get(`/events/event/${id}/update/`)
-      .then(res => {
-        setEventData(res.data);
-        setLoading(false);
-        console.log(res.data);
-      })
-      .catch(err => {
-        setError('Failed to load event details.');
-        setLoading(false);
-      });
-      
-      axiosInstance.get('/events/topics/')
-      .then(res => setTopicsList(res.data));
+  axiosInstance.get(`/events/event/${id}/`)
+    .then(res => {
+      setEventData(res.data);
 
-  }, [id]);
+      // Initialize formData with fetched event data
+      setFormData({
+        title: res.data.title,
+        description: res.data.description,
+        location: res.data.location,
+        date_time: res.data.date_time,
+        number_of_seats: res.data.number_of_seats,
+        language: res.data.language,
+        topic_ids: res.data.topic_ids || [],
+        thumbnail: null,  // will only be updated if new one is selected
+      });
+
+      setLoading(false);
+    })
+    .catch(err => {
+      setError('Failed to load event details.');
+      setLoading(false);
+    });
+
+  axiosInstance.get('/events/topics/')
+    .then(res => setTopicsList(res.data));
+}, [id]);
+
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -73,8 +85,10 @@ const EventControlPage = () => {
     formDataToSend.append('date_time', formData.date_time);
     formDataToSend.append('number_of_seats', formData.number_of_seats);
     formDataToSend.append('language', formData.language);
-    formDataToSend.append('thumbnail', thumbnail, thumbnail.name);
-    axiosInstance.post('/events/create/', formDataToSend ,{
+    if (thumbnail) {
+      formDataToSend.append('thumbnail', thumbnail, thumbnail.name);
+    }
+    axiosInstance.post(`/events/event/${eventData.id}/update/`, formDataToSend ,{
         topic_ids: formData.topic_ids,
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -102,12 +116,12 @@ const EventControlPage = () => {
                 <Row>
                     <Form.Group className="mb-3 fw-bold ">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control name="title"  value={eventData.title} onChange={handleChange} required />
+                    <Form.Control name="title"  value={formData.title} onChange={handleChange} required />
                     </Form.Group>
                 <Col md={6}>
                     <Form.Group className="mb-3 fw-bold">
-                    <Form.Label>Date & Time: {new Date(eventData.date_time).toLocaleString().slice(0, 17)}</Form.Label>
-                    <Form.Control type="datetime-local" name="date_time" onChange={handleChange} required />
+                    <Form.Label>Date & Time: {new Date(formData.date_time).toLocaleString().slice(0, 17)}</Form.Label>
+                    <Form.Control type="datetime-local" name="date_time" onChange={handleChange}/>
                     </Form.Group>
                 </Col>
                 <Col md={6}>
@@ -115,7 +129,7 @@ const EventControlPage = () => {
                         <Form.Label>Location</Form.Label>
                         <Form.Control
                         name="location"
-                        value={eventData.location}
+                        value={formData.location}
                         onChange={handleChange}
                         disabled={formData.location === "Online"}
                         required
@@ -148,12 +162,12 @@ const EventControlPage = () => {
                 <Col md={4}>
                     <Form.Group className="mb-3 fw-bold">
                     <Form.Label>Number of Seats</Form.Label>
-                    <Form.Control type="number" name="number_of_seats" value={eventData.number_of_seats} onChange={handleChange} required />
+                    <Form.Control type="number" name="number_of_seats" value={formData.number_of_seats} onChange={handleChange} required />
                     </Form.Group>
                 </Col>
                     <Form.Group className="mb-3 fw-bold">
                     <Form.Label>Language</Form.Label>
-                    <Form.Select name="language" value={eventData.language} onChange={handleChange}>
+                    <Form.Select name="language" value={formData.language} onChange={handleChange}>
                         <option value="uz">Uzbek</option>
                         <option value="en">English</option>
                         <option value="pl">Polish</option>

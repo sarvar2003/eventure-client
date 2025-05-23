@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axiosInstance from '../utils/axios';
+
+
 
 const EventCard = ({ event }) => {
+  const [eventTopics, seteventTopics] = useState([]);
+
+  useEffect(() => {
+    for (let i = 0; i < event.topics.length; i++) {
+      const topicId = event.topics[i];
+      axiosInstance.get(`/events/topics/${topicId}/`)
+        .then((res) => {
+          seteventTopics((prevTopics) => [...prevTopics, res.data]);
+        })
+        .catch((err) => {
+          console.error('Failed to fetch topic:', err);
+        });
+    }
+  }, []);
+
+
   return (
     <Link to={`/events/${event.id}`} className="text-decoration-none">
       <Card style={{ width: '18rem' }} className="shadow h-100">
@@ -22,7 +42,7 @@ const EventCard = ({ event }) => {
 
             {/* Topics Badges */}
             <div className="mb-2">
-              {event.topics.map((topic, index) => (
+              {eventTopics.map((topic, index) => (
                 <Badge bg="secondary" className="me-1" key={index}>
                   {topic.name}
                 </Badge>

@@ -19,6 +19,8 @@ const EventList = ({ filters }) => {
         
         const response = await axiosInstance.get(`/events/?${queryParams.toString()}`);
         setEvents(response.data);
+        console.log(response.data);
+        
       } catch (error) {
         console.error('Failed to fetch events:', error);
       } finally {

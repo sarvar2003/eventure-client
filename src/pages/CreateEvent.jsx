@@ -12,7 +12,7 @@ const CreateEvent = () => {
     date_time: '',
     number_of_seats: 0,
     language: 'en',
-    topic_ids: [],
+    topics: [],
     thumbnail: null,
   });
   
@@ -31,9 +31,9 @@ const CreateEvent = () => {
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     
-    if (name === 'topic_ids') {
+    if (name === 'topics') {
       const selected = Array.from(e.target.selectedOptions, option => option.value);
-      setFormData(prev => ({ ...prev, topic_ids: selected }));
+      setFormData(prev => ({ ...prev, topics: selected }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -50,8 +50,10 @@ const handleSubmit = (e) => {
   formDataToSend.append('number_of_seats', formData.number_of_seats);
   formDataToSend.append('language', formData.language);
   formDataToSend.append('thumbnail', thumbnail, thumbnail.name);
+  formData.topics.forEach(topic => {
+    formDataToSend.append('topics', topic); 
+  });
   axiosInstance.post('/events/create/', formDataToSend ,{
-      topic_ids: formData.topic_ids,
       headers: {
         'Content-Type': 'multipart/form-data',
         'X-CSRFToken': 'CSRF_TOKEN',
@@ -148,14 +150,14 @@ const handleSubmit = (e) => {
                         label={topic.name}
                         value={topic.id}
                         className="text-capitalize me-3 mb-2"
-                        checked={formData.topic_ids.includes(topic.id)}
+                        checked={formData.topics.includes(topic.id)}
                         onChange={(e) => {
                         const topicId = parseInt(e.target.value);
                         setFormData((prev) => ({
                             ...prev,
-                            topic_ids: e.target.checked
-                            ? [...prev.topic_ids, topicId]
-                            : prev.topic_ids.filter((id) => id !== topicId),
+                            topics: e.target.checked
+                            ? [...prev.topics, topicId]
+                            : prev.topics.filter((id) => id !== topicId),
                         }));
                         }}
                     />
