@@ -10,7 +10,7 @@ const EventCard = ({ event }) => {
   const [eventTopics, seteventTopics] = useState([]);
 
   useEffect(() => {
-    for (let i = 0; i < event.topics.length; i++) {
+    for (let i = 0; i < 3; i++) {
       const topicId = event.topics[i];
       axiosInstance.get(`/events/topics/${topicId}/`)
         .then((res) => {
@@ -21,6 +21,13 @@ const EventCard = ({ event }) => {
         });
     }
   }, []);
+
+const languageMap = {
+  en: 'English',
+  uz: 'Uzbek',
+  ru: 'Russian',
+  pl: 'Polish',
+};
 
 
   return (
@@ -35,9 +42,12 @@ const EventCard = ({ event }) => {
         <Card.Body className="d-flex flex-column justify-content-between">
           <div>
             <Card.Title>{event.title}</Card.Title>
+
+            {/* Metadata */}
             <Card.Text>
               📍 {event.location} <br />
-              📅 {event.formatted_date.day}/{event.formatted_date.month}/{event.formatted_date.year}
+              📅 {event.formatted_date.day}/{event.formatted_date.month}/{event.formatted_date.year} <br />
+              🈯 {languageMap[event.language] || 'Unknown'}
             </Card.Text>
 
             {/* Topics Badges */}
@@ -50,7 +60,7 @@ const EventCard = ({ event }) => {
             </div>
           </div>
 
-          <Button variant="primary" >View Details</Button>
+          <Button variant="primary">View Details</Button>
         </Card.Body>
       </Card>
     </Link>
