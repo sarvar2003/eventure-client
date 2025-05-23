@@ -31,8 +31,8 @@ const languageMap = {
 
 
   return (
-    <Link to={`/events/${event.id}`} className="text-decoration-none">
-      <Card style={{ width: '18rem' }} className="shadow h-100">
+    <Link to={`/events/${event.id}`} className="text-decoration-none text-center">
+      <Card style={{ width: '20rem' }} className="shadow h-100">
         <Card.Img
           variant="top"
           src={event.thumbnail}

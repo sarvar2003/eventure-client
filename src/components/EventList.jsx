@@ -32,7 +32,7 @@ const EventList = ({ filters }) => {
   }, [filters]);
 
   return (
-    <Container>
+    <Container className="text-center">
       {loading ? (
         <div className="text-center my-5">
           <Spinner animation="border" variant="primary" />
