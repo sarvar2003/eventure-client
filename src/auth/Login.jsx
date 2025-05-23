@@ -62,7 +62,7 @@ const Login = () => {
             <h1 className="logo-text">Eventure</h1>
             </a>
         </nav>
-        <div className="d-flex flex-column align-items-center justify-content-center">
+        <div className="w-100" style={{ maxWidth: '500px' }}>
             <h5 className="text-danger mt-2">{errorMessage.message}</h5>
             <form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -96,10 +96,10 @@ const Login = () => {
             </div>
             <button type="submit" className="btn btn-primary ms-3">Login</button>
             </form>
-            <p className="mt-5 text-muted">
+            <p className="mt-5 text-muted text-center">
                 <a href="/forgot-password" className="text-primary-blue text-decoration-underline">Forgot password</a>
             </p>
-            <p className="text-muted">
+            <p className="text-muted text-center">
                 No account ? <a href="/signup" className="text-primary-blue text-decoration-underline">Signup</a>
             </p>
 
