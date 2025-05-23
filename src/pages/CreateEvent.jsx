@@ -152,7 +152,7 @@ const handleSubmit = (e) => {
                         className="text-capitalize me-3 mb-2"
                         checked={formData.topics.includes(topic.id)}
                         onChange={(e) => {
-                        const topicId = e.target.value;
+                        const topicId = parseInt(e.target.value);
                         setFormData((prev) => ({
                             ...prev,
                             topics: e.target.checked
