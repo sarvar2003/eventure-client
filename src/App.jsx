@@ -15,6 +15,7 @@ import CreateEvent from './pages/CreateEvent';
 import VerifyEmail from './auth/VerifyEmail';
 import EventControlPage from './pages/EventContolPage';
 import NotFound from './pages/NotFound';
+import UserInterestsPage from './pages/UserInterestsPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       {/* <Route path="/" element={<Home />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/interests" element={<UserInterestsPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />  
       <Route path="/password-reset/:token" element={<PasswordReset />} />
       <Route path="/verify-email/:token" element={<VerifyEmail />} />

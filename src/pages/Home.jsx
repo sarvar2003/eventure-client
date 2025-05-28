@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import EventList from '../components/EventList';
@@ -10,6 +10,14 @@ const Home = () => {
     language: '',
     topic: '',
   });
+
+  useEffect(() => {
+
+    const userInterestedTopics = document.cookie.split('; ').find(row => row.startsWith('user_interested_topics='));
+    if (!userInterestedTopics) {
+           window.location.href = '/interests';
+    }
+  }, []);
 
   const handleApplyFilters = (newFilters) => {
     setFilters(newFilters);
