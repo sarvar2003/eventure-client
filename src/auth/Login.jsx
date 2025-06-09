@@ -36,7 +36,6 @@ const Login = () => {
 
     axiosInstance
       .post('users/token/', {
-        grant_type: 'password',
         email: formData.email,
         password: formData.password,
       })
@@ -63,7 +62,7 @@ const Login = () => {
             </a>
         </nav>
         <div className="w-100" style={{ maxWidth: '500px' }}>
-            <h5 className="text-danger mt-2">{errorMessage.message}</h5>
+            <h5 className="text-danger mt-2 text-center">{errorMessage.message}</h5>
             <form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
             <div className="mb-3">
                 <input

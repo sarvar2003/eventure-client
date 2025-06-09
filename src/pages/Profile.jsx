@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import DeleteAccountModal from '../components/DeleteAccountModal';
+import Footer from '../components/Footer';
 
 const Profile = () => {
   const [userData, setUserData] = useState({
@@ -228,6 +229,7 @@ const Profile = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

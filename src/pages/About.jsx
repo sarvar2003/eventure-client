@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import Navbar from '../components/Navbar'; 
 import { about } from '../assets/images/export';
+import Footer from '../components/Footer';
 
 const About = () => {
   return (
@@ -52,6 +53,7 @@ const About = () => {
             </Col>
         </Row>
         </Container>
+        <Footer />
     </div>
   );
 };

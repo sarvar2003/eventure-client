@@ -4,6 +4,7 @@ import axiosInstance from '../utils/axios';
 import { Container, Row, Col, Image, Badge } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -65,12 +66,12 @@ const EventDetails = () => {
 
           <Col md={6}>
             <div className="mt-4 bg-light p-4 rounded shadow-sm">
-              <h4 className="mb-3">Event Information</h4>
+              <h4 className="mb-3">About the event</h4>
               <p><strong>Hosted by:</strong> {event.host_name}</p>
               <p><strong>Date & Time:</strong> {formatDateTime(event.formatted_date)}</p>
               <p><strong>Location:</strong> {event.location}</p>
               <p><strong>Seats Available:</strong> {event.number_of_seats}</p>
-              <p className="text-muted"><small><Badge bg="secondary">Event ID: {event.id}</Badge></small></p>
+              {/* <p className="text-muted"><small><Badge bg="secondary">Event ID: {event.id}</Badge></small></p> */}
             </div>
           </Col>
           <Col md={6}>
@@ -102,12 +103,13 @@ const EventDetails = () => {
         <Row className="mt-5">
           <Col>
             <div className="p-4 bg-white border rounded shadow-sm">
-              <h4 className="mb-3">About this event</h4>
+              <h4 className="mb-3">Desrciption</h4>
               <p style={{ whiteSpace: 'pre-wrap' }}>{event.description}</p>
             </div>
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

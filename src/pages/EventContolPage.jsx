@@ -4,6 +4,7 @@ import axiosInstance from '../utils/axios';
 import Navbar from '../components/Navbar';
 import { Container, Image } from 'react-bootstrap';
 import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
+import Footer from '../components/Footer';
 
 
 const EventControlPage = () => {
@@ -229,6 +230,7 @@ const EventControlPage = () => {
                 </Row>
             </Form>
         </Container>
+        <Footer />
     </div>
   );
 };

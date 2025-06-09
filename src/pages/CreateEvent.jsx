@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import axiosInstance from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
@@ -180,6 +181,7 @@ const handleSubmit = (e) => {
         </Form>
 
         </Container>
+        <Footer />  
     </div>
   );
 };

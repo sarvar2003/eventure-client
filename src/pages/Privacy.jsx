@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 const PrivacyPolicy = () => {
   return (
@@ -43,6 +44,7 @@ const PrivacyPolicy = () => {
       </p>
 
       <p className="mt-5 text-muted">Last updated: May 7, 2025</p>
+      <Footer />
     </div>
   );
 };
