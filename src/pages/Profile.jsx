@@ -39,7 +39,7 @@ const Profile = () => {
         try {
             const email = Cookies.get('email');
             if (!email) {
-                alert('Please, login to view your registered events.');
+                alert('Please, login to view your profile!.');
                 return;
             }
             const response = await axiosInstance.get(`/reservations/user-reservations/${email}/`);
@@ -57,7 +57,7 @@ const Profile = () => {
         try {
             const email = Cookies.get('email');
             if (!email) {
-                alert('Please, login to view your organized events.');
+                // alert('Please, login to view your organized events.');
                 return;
             }
             const response = await axiosInstance.get(`/events/user-events/${email}/`);
@@ -101,7 +101,7 @@ const Profile = () => {
     }
   };
 
-  const handelDelete = async (eventId) => {
+  const handelDeleteEvent = async (eventId) => {
     if (window.confirm("Are you sure you want to delete this event?")) {  
       try {
         await axiosInstance.delete(`/events/event/${eventId}/update/`);
@@ -190,7 +190,7 @@ const Profile = () => {
           <h3 className="mt-5">Registered Events</h3>
             {registeredEvents.length > 0 ? (
             registeredEvents.map(reservation => (
-                <div className="event-card p-2 border rounded mb-2 d-flex justify-content-between align-items-center" key={reservation.id}>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/events/${reservation.event}`} className="event-card p-2 border rounded mb-2 d-flex justify-content-between align-items-center" key={reservation.id}>
                   <div>
                     <h5>{reservation.event_title}</h5>
                     <p className="mb-0">{reservation.event_location} – {new Date(reservation.event_date_time).toLocaleString().slice(0, 17)}</p>
@@ -201,7 +201,7 @@ const Profile = () => {
                     onClick={() => handleCancel(reservation.id)}>
                     Cancel Reservation
                   </button>
-                </div>
+                </Link>
             ))
             ) : <p>No registered events.</p>}
           </Col>
@@ -217,7 +217,7 @@ const Profile = () => {
                     </p>
                   </Link>
 
-                  <button className="btn text-danger btn-sm ms-3 border-danger" onClick={() => handelDelete(event.id)}>
+                  <button className="btn text-danger btn-sm ms-3 border-danger" onClick={() => handelDeleteEvent(event.id)}>
                     Delete Event
                   </button>
                 </div>

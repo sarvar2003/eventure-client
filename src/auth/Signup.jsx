@@ -35,6 +35,7 @@ const Signup = () => {
         setIsRegistered(true);
       })
       .catch((error) => {
+        console.log('Signup error:', error);
         if (error.response) {
           if (error.response.data.email) {
             setErrorMessage('This email is already taken.');
