@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 import axiosInstance from '../utils/axios';
 import Cookies from 'js-cookie';
 import '../styles/auth.css';
@@ -21,6 +22,7 @@ const Login = () => {
   const [formData, updateFormDate] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState({ message: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     updateFormDate({
@@ -33,6 +35,7 @@ const Login = () => {
     e.preventDefault();
 
     setErrorMessage({ message: '' });
+    setLoading(true);
 
     axiosInstance
       .post('users/token/', {
@@ -51,6 +54,7 @@ const Login = () => {
         if (error.message) {
           setErrorMessage({ message: 'Email or password is incorrect' });
         }
+        setLoading(false);
       });
   };
 
@@ -93,7 +97,14 @@ const Login = () => {
                 <label className="form-check-label ms-2 text-muted small">Show password</label>
                 </div>
             </div>
+            {loading ? (
+                <button className="btn btn-primary d-flex justify-content-center align-items-center" type="button" disabled>
+                <Spinner  as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                {/* <span className="ms-2">Logging in...</span> */}
+                </button>   
+            ) : (   
             <button type="submit" className="btn btn-primary ms-3">Login</button>
+            )}
             </form>
             <p className="mt-5 text-muted text-center">
                 <a href="/forgot-password" className="text-primary-blue text-decoration-underline">Forgot password</a>

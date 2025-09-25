@@ -17,6 +17,7 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,6 +29,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage('');
+    setLoading(true);
 
     axiosInstance
       .post('users/create/', formData)
@@ -47,6 +49,7 @@ const Signup = () => {
         } else {
           setErrorMessage('Server error.');
         }
+        setLoading(false);
       });
   };
 
@@ -114,9 +117,15 @@ const Signup = () => {
                 <label className="form-check-label ms-2 text-muted small">Show password</label>
                 </div>
             </div>
+            {loading ? (
+                <button className="btn btn-primary d-flex justify-content-center align-items-center" type="button" disabled>
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
+            ) : (
             <button type="submit" className="btn btn-primary ms-3">
               Signup
             </button>
+            )}
             <p className="text-center text-muted mt-3">
               Already signed up ? {' '}
               <a href="/login" className="text-primary text-decoration-underline">
